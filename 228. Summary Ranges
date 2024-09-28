@@ -1,0 +1,38 @@
+class Solution {
+    public List<String> summaryRanges(int[] nums) {
+        List<String> resultList = new ArrayList<String>();
+        if (nums.length>1) {
+            int min = nums[0];
+            int temp = nums[0];
+            int max = nums[0];
+            for (int i=1;i<nums.length;i++) {
+                if (temp+1==nums[i]) {
+                    temp = nums[i];
+                    max = nums[i];
+                    if (i==nums.length-1) {
+                        if (min==max) {
+                            resultList.add(String.valueOf(min));
+                        } else{
+                            resultList.add(min+"->"+max);
+                        }
+                    }
+                } else {
+                    if (min==max) {
+                        resultList.add(String.valueOf(min));
+                    } else{
+                        resultList.add(min+"->"+max);
+                    }
+                    min = nums[i];
+                    temp = nums[i];
+                    max = nums[i];
+                    if (i==nums.length-1) {
+                        resultList.add(String.valueOf(min));
+                    }
+                }
+            }
+        } else if (nums.length==1) {
+            resultList.add(String.valueOf(nums[0]));
+        }
+        return resultList;
+    }
+}
