@@ -1,34 +1,15 @@
 class Solution {
     public String addBinary(String a, String b) {
         StringBuilder result = new StringBuilder();
-        int aLen = a.length();
-        int bLen = b.length();
-        int count = 0;
-        int leading = 0;
-        while (aLen>count || bLen>count) {
-            int temp = leading;
-            if (aLen>count && "1".equals(a.substring(aLen-count-1, aLen-count))) {
-                temp++;
-            }
-            if (bLen>count && "1".equals(b.substring(bLen-count-1, bLen-count))) {
-                temp++;
-            }
-            if (temp >= 2) {
-                if (temp == 2) {
-                    result.insert(0, "0");
-                } else {
-                    result.insert(0, "1");
-                }
-                leading = 1;
-            } else {
-                result.insert(0, String.valueOf(temp));
-                leading = 0;
-            }
-            count++;
+        int i=a.length()-1, j=b.length()-1, carry=0;
+
+        while (i>=0 || j>=0 || carry==1){
+            int total=carry;
+            if(i>=0) total+= a.charAt(i--) - '0';
+            if(j>=0) total+= b.charAt(j--) - '0';
+            result.append(total%2);
+            carry=total/2;
         }
-        if (leading == 1) {
-            result.insert(0, "1");
-        }
-        return result.toString();
+        return result.reverse().toString();
     }
 }
