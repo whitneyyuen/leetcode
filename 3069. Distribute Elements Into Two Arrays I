@@ -1,0 +1,21 @@
+class Solution {
+    public int[] resultArray(int[] nums) {
+        int[] arr1 = new int[nums.length];
+        int[] arr2 = new int[nums.length];
+        int t1 = 0;
+        int t2 = 0;
+        arr1[t1++] = nums[0];
+        arr2[t2++] = nums[1];
+        for (int i=2;i<nums.length;i++) {
+            if (arr1[t1-1]>arr2[t2-1]) {
+                arr1[t1++] = nums[i];
+            } else {
+                arr2[t2++] = nums[i];
+            }
+        }
+        int[] result = new int[nums.length];
+        System.arraycopy(arr1, 0, result, 0, t1);
+        System.arraycopy(arr2, 0, result, t1, t2);
+        return result;
+    }
+}
