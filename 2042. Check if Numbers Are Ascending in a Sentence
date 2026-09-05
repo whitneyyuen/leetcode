@@ -1,0 +1,16 @@
+class Solution {
+    public boolean areNumbersAscending(String s) {
+        boolean resultInd = true;
+        int past = 0;
+        String[] sArr = s.split(" ");
+        for (String temp:sArr) {
+            if (temp.matches("\\d+")) {
+                if (Integer.parseInt(temp)<=past) {
+                    return false;
+                }
+                past = Integer.parseInt(temp);
+            }
+        }
+        return resultInd;
+    }
+}
