@@ -1,0 +1,51 @@
+class Solution {
+    public int myAtoi(String s) {
+        long result = 0;
+        int signed = 1;
+        boolean ind = false;
+        
+        if (s.length()==0) {
+            return 0;
+        }
+
+        for (int i=0;i<s.length();i++) {
+            if (s.charAt(i)==' ') {
+                if (ind) {
+                    return (int)result*signed; 
+                }
+                continue;
+            } else if (s.charAt(i)=='+') {
+                if (ind) {
+                    return (int)result*signed; 
+                }
+                ind = true;
+            } else if (s.charAt(i)=='-') {
+                if (ind) {
+                    return (int)result*signed; 
+                }
+                signed = -1;
+                ind = true;
+            } else if (s.charAt(i)=='.') {
+                ind = true;
+                if (i==0)
+                    return 0;
+                else
+                    break;
+            } else {
+                ind = true;
+                if (!Character.isDigit(s.charAt(i))) {
+                    return (int)result*signed;
+                }
+                result = result*10+(int)(s.charAt(i) - '0');
+                if (result*signed>Integer.MAX_VALUE || result*signed<Integer.MIN_VALUE) {
+                    if (signed==1) {
+                        return Integer.MAX_VALUE;
+                    } else {
+                        return Integer.MIN_VALUE;
+                    }
+                }
+            }            
+        }
+        return (int)result*signed;
+    }
+}
