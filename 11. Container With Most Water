@@ -1,0 +1,19 @@
+class Solution {
+    public int maxArea(int[] height) {
+        int head = 0;
+        int tail = height.length-1;
+        int max = Math.min(height[0], height[tail])*tail;
+        while(head<tail) {
+            if (height[head]<=height[tail]) {
+                head++;
+            } else {
+                tail--;
+            }
+            if (max<Math.min(height[head], height[tail])*(tail-head)) {
+                max = Math.min(height[head], height[tail])*(tail-head);
+            }
+        }
+
+        return max;
+    }
+}
